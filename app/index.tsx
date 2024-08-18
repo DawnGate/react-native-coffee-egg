@@ -1,15 +1,11 @@
-import { Text, View } from "react-native";
+import { DefaultLayout } from "@/components/Layout/DefaultLayout";
+import { Onboarding } from "./onboarding";
 
-export default function Index() {
+const Index = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <DefaultLayout>
+      <Onboarding />
+    </DefaultLayout>
   );
-}
+};
+export default Index;
