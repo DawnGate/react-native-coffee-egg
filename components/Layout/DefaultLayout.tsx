@@ -10,7 +10,6 @@ export const DefaultLayout = ({ children }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "yellow",
     flex: 1,
     paddingTop: 30,
   },

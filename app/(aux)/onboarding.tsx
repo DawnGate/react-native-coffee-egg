@@ -1,22 +1,29 @@
-import { useNavigation } from "expo-router";
 import { useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "expo-router";
+import { useDispatch } from "react-redux";
 
-export const Onboarding = () => {
+import { toggleOnboarding } from "@/store/features/setting/settingSlice";
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
+
+const maxStep = 3;
+
+export default function Index() {
   const [step, setStep] = useState(1);
-  const navigation = useNavigation();
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
+
+  const dispatch = useDispatch();
 
   const handleSkip = () => {
-    if (step === 1) {
-      navigation.navigate("(aux)", {
-        screen: "register",
-      });
-    } else {
-      navigation.navigate("(app)" as never);
-    }
+    navigation.navigate("(app)");
+    dispatch(toggleOnboarding());
   };
 
   const handleNext = () => {
+    if (step === maxStep) {
+      handleSkip();
+      return;
+    }
     setStep((prev) => prev + 1);
   };
 
@@ -34,7 +41,7 @@ export const Onboarding = () => {
       <Button onPress={handleNext} title="next" />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   text: {
