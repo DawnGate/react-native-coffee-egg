@@ -10,6 +10,7 @@ import { StoreProvider } from "@/store/StoreProvider";
 import { RootState } from "@/store/store";
 import { initSetting } from "@/store/features/setting/settingSlice";
 import { getASDataByKey } from "@/utils/asyncStorage";
+import { SETTINGS } from "@/constants/settings";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,7 +25,12 @@ export default function RootLayout() {
               headerShown: false,
             }}
           />
-          <Stack.Screen name="(app)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="(app)"
+            options={{
+              headerShown: false,
+            }}
+          />
           <Stack.Screen name="(aux)" options={{ headerShown: false }} />
         </Stack>
       </LoadSetting>
@@ -47,7 +53,7 @@ const LoadSetting = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const getInitSettings = async () => {
-      const showOnboarding = await getASDataByKey("setting-show-onboarding");
+      const showOnboarding = await getASDataByKey(SETTINGS.SHOW_ONBOARD_KEY);
       dispatch(
         initSetting({
           showOnboarding: !!showOnboarding,

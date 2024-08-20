@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     flexDirection: "row",
     justifyContent: "space-around",
-    gap: 20,
     backgroundColor: "rgba(255, 255, 255, 0.75)",
+    borderTopWidth: 0.5,
+    borderColor: "rgba(0,0,0, 0.3)",
   },
 });

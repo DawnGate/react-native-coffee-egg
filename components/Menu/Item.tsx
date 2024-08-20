@@ -12,7 +12,7 @@ export const MenuItem = ({ icon, title, pathname, isActive }: Props) => {
   return (
     <Link href={pathname as Href<string>}>
       <View style={[styles.container]}>
-        <View>
+        <View style={styles.iconContainer}>
           <FontAwesome6
             name={icon as any}
             size={24}
@@ -43,6 +43,13 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     gap: 4,
+    width: 60,
+  },
+  iconContainer: {
+    width: 28,
+    height: 28,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

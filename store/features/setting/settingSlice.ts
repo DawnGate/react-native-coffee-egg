@@ -1,3 +1,4 @@
+import { SETTINGS } from "@/constants/settings";
 import { deleteASDataByKey, storeASData } from "@/utils/asyncStorage";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
@@ -20,9 +21,9 @@ export const settingSlice = createSlice({
     },
     toggleOnboarding: (state) => {
       if (state.showOnboarding) {
-        deleteASDataByKey("setting-show-onboarding");
+        deleteASDataByKey(SETTINGS.SHOW_ONBOARD_KEY);
       } else {
-        storeASData("setting-show-onboarding", "show");
+        storeASData(SETTINGS.SHOW_ONBOARD_KEY, "show");
       }
       state.showOnboarding = !state.showOnboarding;
     },

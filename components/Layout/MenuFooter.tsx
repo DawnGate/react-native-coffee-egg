@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { Menu } from "@/components/Menu";
+import { COLORS } from "@/constants/colors";
 
 type Props = {
   children: ReactNode;
@@ -9,7 +10,7 @@ type Props = {
 export const MenuFooter = ({ children }: Props) => {
   return (
     <View style={styles.container}>
-      <ScrollView>{children}</ScrollView>
+      {children}
       <Menu />
     </View>
   );
@@ -17,8 +18,8 @@ export const MenuFooter = ({ children }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "yellow",
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 36,
+    backgroundColor: COLORS.frothyWhite,
   },
 });
