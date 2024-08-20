@@ -4,7 +4,7 @@ import { COLORS } from "@/constants/colors";
 
 import { UserGreeting } from "@/components/pages/home/UserGreeting";
 import { SpecialOffer } from "@/components/pages/home/SpecialOffer";
-import { MenuList } from "@/components/pages/home/MenuList";
+import { HomeBanners } from "@/components/pages/home/HomeBanners";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -14,7 +14,7 @@ export default function Home() {
       <ScrollView>
         <UserGreeting />
         <SpecialOffer />
-        <MenuList />
+        <HomeBanners />
       </ScrollView>
     </View>
   );
