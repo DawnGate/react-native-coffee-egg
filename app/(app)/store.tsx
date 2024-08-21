@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 export { ErrorBoundary } from "expo-router";
 
-export default function Account() {
+export default function Store() {
   return <UpcomingSoon />;
 }
 

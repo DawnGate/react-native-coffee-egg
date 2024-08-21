@@ -1,6 +1,12 @@
+import { COLORS } from "@/constants/colors";
+import { router } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const HomeBanner = () => {
+  const handlePress = () => {
+    router.push("/(app)/order");
+  };
+
   return (
     <View style={itemStyles.container}>
       <View>
@@ -10,7 +16,7 @@ const HomeBanner = () => {
         </Text>
       </View>
 
-      <Pressable onPress={() => {}} style={itemStyles.btnContainer}>
+      <Pressable onPress={handlePress} style={itemStyles.btnContainer}>
         <Text style={itemStyles.btnText}>Find out more</Text>
       </Pressable>
     </View>
@@ -40,24 +46,24 @@ const styles = StyleSheet.create({
 
 const itemStyles = StyleSheet.create({
   container: {
-    backgroundColor: "#fb7185",
+    backgroundColor: COLORS.latte,
     padding: 16,
   },
   titleText: {
     fontFamily: "Poppins",
     fontWeight: "700",
-    color: "#fff",
+    color: COLORS.white,
     fontSize: 20,
   },
   descriptionText: {
     marginTop: 8,
     fontFamily: "Poppins",
-    color: "#fff",
+    color: COLORS.white,
     maxWidth: "70%",
     fontSize: 14,
   },
   btnContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.white,
     alignSelf: "flex-start",
     borderRadius: 999,
     paddingHorizontal: 24,
@@ -67,6 +73,6 @@ const itemStyles = StyleSheet.create({
   btnText: {
     fontWeight: "700",
     fontFamily: "Poppins",
-    color: "#000",
+    color: COLORS.black,
   },
 });

@@ -14,6 +14,9 @@ const AppLayout = () => {
       >
         <Tabs.Screen name="index" />
         <Tabs.Screen name="account" />
+        <Tabs.Screen name="store" />
+        <Tabs.Screen name="order" />
+        <Tabs.Screen name="rewards" />
       </Tabs>
     </MenuFooter>
   );
