@@ -1,11 +1,13 @@
 import { COLORS } from "@/constants/colors";
 import { mockDrinkImg } from "@/constants/mockData";
+import { toggleModal } from "@/store/features/order/orderSlice";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { Image, StyleSheet, Text, View } from "react-native";
 import {
   GestureHandlerRootView,
   RectButton,
 } from "react-native-gesture-handler";
+import { useDispatch } from "react-redux";
 
 export const OrderMenus = () => {
   const categories = Array(10)
@@ -24,9 +26,15 @@ export const OrderMenus = () => {
 };
 
 const OrderMenu = () => {
+  const dispatch = useDispatch();
+
   const items = Array(8)
     .fill(0)
     .map((_, index) => index);
+
+  const toggleModalDetail = () => {
+    dispatch(toggleModal());
+  };
 
   return (
     <View style={styles.container}>
@@ -35,7 +43,7 @@ const OrderMenu = () => {
       </View>
       <View style={styles.itemsContainer}>
         {items.map((item) => (
-          <RectButton key={item} onPress={() => alert("Pressed!")}>
+          <RectButton key={item} onPress={toggleModalDetail}>
             <View style={itemStyles.container}>
               <View style={itemStyles.imageContainer}>
                 <Image style={itemStyles.image} source={mockDrinkImg} />

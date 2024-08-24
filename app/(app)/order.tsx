@@ -1,4 +1,5 @@
 import { Category } from "@/components/pages/order/Category";
+import { DetailModel } from "@/components/pages/order/DetailModal";
 import { FloatCart } from "@/components/pages/order/FloatCart";
 import { OrderMenus } from "@/components/pages/order/OrderMenus";
 import { COLORS } from "@/constants/colors";
@@ -20,6 +21,7 @@ export default function Order() {
         <OrderMenus />
       </ScrollView>
       <FloatCart />
+      <DetailModel />
     </View>
   );
 }
