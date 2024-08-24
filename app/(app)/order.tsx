@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
+    marginTop: 12,
     paddingHorizontal: 16,
     paddingVertical: 8,
   },

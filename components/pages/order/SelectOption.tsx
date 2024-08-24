@@ -1,10 +1,9 @@
-import { IOptionSelect } from "@/constants/order";
 import { numberWithCommas } from "@/utils/numbers";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
-import { useState } from "react";
 import { COLORS } from "@/constants/colors";
+import { IOptionSelect } from "@/types/order";
 
 type Props = {
   title: string;

@@ -1,24 +1,21 @@
 import { COLORS } from "@/constants/colors";
-import { mockDrinkImg } from "@/constants/mockData";
+import { mockCategories } from "@/constants/mockData";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 export const Category = () => {
-  const categories = Array(10)
-    .fill(0)
-    .map((_, index) => index);
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>Category</Text>
       </View>
       <View style={styles.categoriesContainer}>
-        {categories.map((item) => (
-          <View key={item} style={itemStyles.container}>
+        {mockCategories.map((item) => (
+          <View key={item.id} style={itemStyles.container}>
             <View style={itemStyles.imageContainer}>
-              <Image style={itemStyles.image} source={mockDrinkImg} />
+              <Image style={itemStyles.image} source={item.imageSource} />
             </View>
             <View style={itemStyles.textContainer}>
-              <Text style={itemStyles.text}>Hot Coffee</Text>
+              <Text style={itemStyles.text}>{item.name}</Text>
             </View>
           </View>
         ))}
@@ -45,27 +42,32 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     gap: 24,
     rowGap: 16,
+    justifyContent: "center",
   },
 });
 
 const itemStyles = StyleSheet.create({
-  container: {},
+  container: {
+    width: "20%",
+    alignItems: "center",
+  },
   imageContainer: {
     width: 64,
     height: 64,
     borderRadius: 999,
-    margin: "auto",
+    borderWidth: 0.5,
+    borderColor: COLORS.latte,
     backgroundColor: COLORS.espresso,
     justifyContent: "center",
     alignItems: "center",
+    overflow: "hidden",
   },
   image: {
     flex: 1,
-    aspectRatio: 1.5,
     resizeMode: "contain",
   },
   textContainer: {
-    marginTop: 20,
+    marginTop: 12,
   },
   text: {
     textAlign: "center",

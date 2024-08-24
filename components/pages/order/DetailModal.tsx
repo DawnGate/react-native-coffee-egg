@@ -1,7 +1,7 @@
 import {
   initDetail,
-  toggleModal,
-  updateDetail,
+  closeModal,
+  updateCustomize,
 } from "@/store/features/order/orderSlice";
 import { RootState } from "@/store/store";
 import {
@@ -18,107 +18,144 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { COLORS } from "@/constants/colors";
-import { mockModalImg } from "@/constants/mockData";
+import { mockItemDetails, mockModalImg } from "@/constants/mockData";
 import { SelectOptions } from "./SelectOption";
-import { defaultIces, defaultSizes } from "@/constants/order";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { ICustomizes, IDefaultCustomizes, IItemDetail } from "@/types/order";
+import { numberWithCommas } from "@/utils/numbers";
+
+const getItemValue = (
+  customizes?: ICustomizes,
+  defaultCustomizes?: IDefaultCustomizes
+) => {
+  if (!customizes || !defaultCustomizes) {
+    return {
+      cost: 0,
+      currency: "",
+    };
+  }
+
+  const foundSize = customizes.size.options.find(
+    (option) => option.id === defaultCustomizes.size
+  );
+
+  const cost = foundSize ? foundSize.cost : 0;
+  const currency = foundSize?.currency;
+
+  return {
+    cost,
+    currency,
+  };
+};
 
 export const DetailModel = () => {
   const dispatch = useDispatch();
 
-  const showModal = useSelector((state: RootState) => state.order.showModal);
-  const itemDetail = useSelector((state: RootState) => state.order.itemDetail);
+  const selectedMenuItem = useSelector(
+    (state: RootState) => state.order.selectedMenuItem
+  );
+  const itemOrderDetail = useSelector(
+    (state: RootState) => state.order.itemOrderDetail
+  );
+
+  const [itemDetail, setItemDetail] = useState<IItemDetail | null>(null);
+
+  const showModal = !!itemDetail;
+
+  const itemValue = getItemValue(
+    itemDetail?.customizes,
+    itemOrderDetail?.customizes
+  );
+
+  useEffect(() => {
+    if (selectedMenuItem) {
+      const foundItem = mockItemDetails[selectedMenuItem];
+      setItemDetail(foundItem);
+      dispatch(
+        initDetail({
+          itemId: foundItem.id,
+          customizes: foundItem.defaultCustomizes,
+        })
+      );
+    } else {
+      setItemDetail(null);
+    }
+  }, [selectedMenuItem]);
 
   const handleAddMoreItem = () => {
     dispatch(
-      updateDetail({
-        numberOfItem: (itemDetail?.numberOfItem ?? 0) + 1,
+      updateCustomize({
+        numberOfItem: (itemOrderDetail?.numberOfItem ?? 0) + 1,
       })
     );
   };
 
   const handleAddLessItem = () => {
-    if (itemDetail?.numberOfItem === 1) return;
+    if (itemOrderDetail?.numberOfItem === 1) return;
 
     dispatch(
-      updateDetail({
-        numberOfItem: (itemDetail?.numberOfItem ?? 0) - 1,
+      updateCustomize({
+        numberOfItem: (itemOrderDetail?.numberOfItem ?? 0) - 1,
       })
     );
   };
 
-  const handleToggleModal = () => {
-    dispatch(toggleModal());
+  const handleCloseModal = () => {
+    dispatch(closeModal());
   };
 
   const handleAddOrder = () => {
-    dispatch(toggleModal());
+    handleCloseModal();
   };
-
-  useEffect(() => {
-    if (showModal) {
-      dispatch(
-        initDetail({
-          size: {
-            value: "L",
-            cost: 10000,
-          },
-          ice: {
-            value: "N",
-          },
-        })
-      );
-    }
-  }, [showModal]);
 
   return (
     <Modal
       visible={showModal}
-      onRequestClose={handleToggleModal}
+      onRequestClose={handleCloseModal}
       animationType="slide"
       transparent={true}
     >
       <View style={styles.backBtnContainer}>
-        <Pressable style={styles.backBtn} onPress={handleToggleModal}>
+        <Pressable style={styles.backBtn} onPress={handleCloseModal}>
           <Ionicons name="arrow-back" size={32} color={COLORS.white} />
         </Pressable>
       </View>
       <ScrollView style={styles.scrollContainer}>
-        <Image style={styles.bannerImg} source={mockModalImg} />
+        <Image
+          style={styles.bannerImg}
+          source={itemDetail?.imageSource || mockModalImg}
+        />
         <View style={[styles.sectionContainer, styles.descriptionContainer]}>
-          <Text style={styles.titleText}>Espresso Sua Da (L)</Text>
-          <Text style={styles.descriptionText}>
-            Espresso là một loại cà phê được bắt nguồn từ nước Ý vào khoảng năm
-            1930. Sau đó lan rộng sang Tây Ban Nha, phổ biến tại Anh những năm
-            1950, rồi dần sang các nước châu Âu và ngày nay thì Espresso đã có
-            mặt khắp nơi trên thế giới. Trong tiếng Ý, “Espresso” có nghĩa là
-            “tức thì, nhanh chóng”. Vậy nên, quá trình tạo ra Espresso và cả
-            việc thưởng thức chúng cũng rất nhanh gọn. Thậm chí ở Ý, người ta
-            gọi tách Espresso và uống ngay tại chỗ chỉ với vài hơi. Các số liệu
-            cho biết đến 80% lượng Espresso của thế giới đang được tiêu thụ tại
-            Ý.
-          </Text>
+          <Text style={styles.titleText}>{itemDetail?.title}</Text>
+          <View style={styles.descriptionTextContainer}>
+            {itemDetail?.description.map((item, index) => (
+              <Text style={styles.descriptionText} key={index}>
+                {item}
+              </Text>
+            ))}
+          </View>
         </View>
 
-        <View style={styles.sectionContainer}>
-          <SelectOptions
-            title="Chon size"
-            options={defaultSizes}
-            onSelect={(val) => {
-              const item = defaultSizes.find((item) => item.id === val);
-              dispatch(
-                updateDetail({
-                  detail: {
-                    size: { ...item, value: item?.id },
-                  },
-                })
-              );
-            }}
-            value={itemDetail?.detail["size"].value}
-          />
-        </View>
+        {showModal &&
+          itemDetail.customizes.size &&
+          itemDetail.customizes.size?.options.length > 1 && (
+            <View style={styles.sectionContainer}>
+              <SelectOptions
+                title="Chose Size:"
+                options={itemDetail?.customizes.size.options}
+                onSelect={(val) => {
+                  dispatch(
+                    updateCustomize({
+                      size: val,
+                    })
+                  );
+                }}
+                value={itemOrderDetail?.customizes.size}
+              />
+            </View>
+          )}
 
         {/* <View style={styles.sectionContainer}>
           <SelectOptions
@@ -130,7 +167,7 @@ export const DetailModel = () => {
           />
         </View> */}
 
-        <View style={styles.sectionContainer}>
+        {/* <View style={styles.sectionContainer}>
           <SelectOptions
             title="Them Muc da"
             options={defaultIces}
@@ -146,19 +183,24 @@ export const DetailModel = () => {
             }}
             value={itemDetail?.detail["ice"].value}
           />
-        </View>
+        </View> */}
 
         <View style={styles.additionContainer} />
       </ScrollView>
       <View style={[styles.floatContainer, floatStyles.container]}>
         <View style={floatStyles.adjustContainer}>
-          <Text style={floatStyles.orderCostText}>47,000$</Text>
+          <Text style={floatStyles.orderCostText}>
+            {numberWithCommas(
+              itemValue.cost * (itemOrderDetail?.numberOfItem ?? 0)
+            )}{" "}
+            {itemValue.currency}
+          </Text>
           <View style={floatStyles.actionContainer}>
             <Pressable onPress={handleAddLessItem}>
               <AntDesign name="minuscircleo" size={28} color="black" />
             </Pressable>
             <Text style={floatStyles.numberItemText}>
-              {itemDetail?.numberOfItem}
+              {itemOrderDetail?.numberOfItem}
             </Text>
             <Pressable onPress={handleAddMoreItem}>
               <AntDesign name="pluscircleo" size={28} color="black" />
@@ -167,7 +209,7 @@ export const DetailModel = () => {
         </View>
         <TouchableOpacity onPress={handleAddOrder}>
           <View style={floatStyles.confirmContainer}>
-            <Text style={floatStyles.orderText}>Add to you order</Text>
+            <Text style={floatStyles.orderText}>Add to cart</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -215,8 +257,11 @@ const styles = StyleSheet.create({
     lineHeight: 32 * 1.2,
     fontFamily: "Poppins",
   },
-  descriptionText: {
+  descriptionTextContainer: {
     marginTop: 10,
+    gap: 6,
+  },
+  descriptionText: {
     fontSize: 16,
     lineHeight: 16 * 1.3,
     fontFamily: "Poppins",

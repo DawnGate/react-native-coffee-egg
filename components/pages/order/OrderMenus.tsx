@@ -1,6 +1,8 @@
 import { COLORS } from "@/constants/colors";
-import { mockDrinkImg } from "@/constants/mockData";
-import { toggleModal } from "@/store/features/order/orderSlice";
+import { mockCategories, mockMenuItems } from "@/constants/mockData";
+import { openModal } from "@/store/features/order/orderSlice";
+import { ICategory } from "@/types/order";
+import { numberWithCommas } from "@/utils/numbers";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { Image, StyleSheet, Text, View } from "react-native";
 import {
@@ -10,47 +12,51 @@ import {
 import { useDispatch } from "react-redux";
 
 export const OrderMenus = () => {
-  const categories = Array(10)
-    .fill(0)
-    .map((_, index) => index);
-
   return (
     <GestureHandlerRootView>
       <View style={{ marginBottom: 80 }}>
-        {categories.map((item) => (
-          <OrderMenu key={item} />
+        {mockCategories.map((item) => (
+          <OrderMenu key={item.id} category={item} />
         ))}
       </View>
     </GestureHandlerRootView>
   );
 };
 
-const OrderMenu = () => {
+type OrderMenuProps = {
+  category: ICategory;
+};
+const OrderMenu = ({ category }: OrderMenuProps) => {
   const dispatch = useDispatch();
 
-  const items = Array(8)
-    .fill(0)
-    .map((_, index) => index);
+  const items = mockMenuItems[category.id] ?? [];
 
-  const toggleModalDetail = () => {
-    dispatch(toggleModal());
+  const toggleModalDetail = (itemId: string) => {
+    dispatch(openModal(itemId));
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>Drink</Text>
+        <Text style={styles.titleText}>{category.name}</Text>
       </View>
       <View style={styles.itemsContainer}>
         {items.map((item) => (
-          <RectButton key={item} onPress={toggleModalDetail}>
+          <RectButton
+            key={item.id}
+            onPress={() => {
+              toggleModalDetail(item.id);
+            }}
+          >
             <View style={itemStyles.container}>
               <View style={itemStyles.imageContainer}>
-                <Image style={itemStyles.image} source={mockDrinkImg} />
+                <Image style={itemStyles.image} source={item.imageSource} />
               </View>
               <View style={itemStyles.textContainer}>
-                <Text style={itemStyles.titleText}>Hot Coffee</Text>
-                <Text style={itemStyles.currencyText}>50.000 đ</Text>
+                <Text style={itemStyles.titleText}>{item.name}</Text>
+                <Text style={itemStyles.currencyText}>
+                  {numberWithCommas(item.cost)} {item.currency}
+                </Text>
               </View>
               <View style={itemStyles.btnContainer}>
                 <View style={itemStyles.btn}>
@@ -114,6 +120,8 @@ const itemStyles = StyleSheet.create({
   currencyText: {
     fontFamily: "Poppins",
     fontSize: 16,
+    letterSpacing: 1,
+    marginTop: 4,
   },
   btnContainer: {
     justifyContent: "flex-end",

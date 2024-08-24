@@ -1,56 +1,57 @@
+import { IDefaultCustomizes } from "@/types/order";
 import { createSlice } from "@reduxjs/toolkit";
 
 export type ItemDetail = {
+  itemId: string;
   numberOfItem: number;
-  detail: {
-    [key: string]: {
-      value: string;
-      cost?: number;
-      currency?: string;
-    };
-  };
+  customizes: IDefaultCustomizes;
 } | null;
 
 export interface OrderState {
-  showModal: boolean;
-  itemDetail: ItemDetail;
+  selectedMenuItem: string | null;
+  itemOrderDetail: ItemDetail;
 }
 
 const initialState: OrderState = {
-  showModal: false,
-  itemDetail: null,
+  selectedMenuItem: null,
+  itemOrderDetail: null,
 };
 
 export const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
-    toggleModal: (state) => {
-      state.showModal = !state.showModal;
+    openModal: (state, action) => {
+      state.selectedMenuItem = action.payload;
+    },
+    closeModal: (state) => {
+      state.selectedMenuItem = null;
     },
     initDetail: (state, action) => {
-      state.itemDetail = {
+      state.itemOrderDetail = {
         numberOfItem: 1,
-        detail: action.payload,
+        ...action.payload,
       };
     },
-    updateDetail: (state, action) => {
-      if (state.itemDetail) {
+    updateCustomize: (state, action) => {
+      if (state.itemOrderDetail) {
         if (action.payload.numberOfItem) {
-          state.itemDetail.numberOfItem = action.payload.numberOfItem;
+          state.itemOrderDetail.numberOfItem = action.payload.numberOfItem;
         }
 
-        if (action.payload.detail) {
-          state.itemDetail.detail = {
-            ...state.itemDetail.detail,
-            ...action.payload.detail,
-          };
+        if (action.payload.size) {
+          state.itemOrderDetail.customizes.size = action.payload.size;
+        }
+
+        if (action.payload.toppings) {
+          state.itemOrderDetail.customizes.toppings = action.payload.toppings;
         }
       }
     },
   },
 });
 
-export const { toggleModal, initDetail, updateDetail } = orderSlice.actions;
+export const { openModal, closeModal, initDetail, updateCustomize } =
+  orderSlice.actions;
 
 export const orderReducer = orderSlice.reducer;
