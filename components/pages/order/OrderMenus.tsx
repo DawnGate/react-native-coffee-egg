@@ -5,21 +5,16 @@ import { ICategory } from "@/types/order";
 import { numberWithCommas } from "@/utils/numbers";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { Image, StyleSheet, Text, View } from "react-native";
-import {
-  GestureHandlerRootView,
-  RectButton,
-} from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
 
 export const OrderMenus = () => {
   return (
-    <GestureHandlerRootView>
-      <View style={{ marginBottom: 80 }}>
-        {mockCategories.map((item) => (
-          <OrderMenu key={item.id} category={item} />
-        ))}
-      </View>
-    </GestureHandlerRootView>
+    <View style={{ marginBottom: 80 }}>
+      {mockCategories.map((item) => (
+        <OrderMenu key={item.id} category={item} />
+      ))}
+    </View>
   );
 };
 

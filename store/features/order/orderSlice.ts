@@ -1,20 +1,26 @@
 import { IDefaultCustomizes } from "@/types/order";
 import { createSlice } from "@reduxjs/toolkit";
 
+import { randomUUID } from "expo-crypto";
+
 export type ItemDetail = {
   itemId: string;
   numberOfItem: number;
   customizes: IDefaultCustomizes;
-} | null;
+};
+
+type CartItem = ItemDetail & { id: string };
 
 export interface OrderState {
   selectedMenuItem: string | null;
-  itemOrderDetail: ItemDetail;
+  itemOrderDetail: ItemDetail | null;
+  cart: CartItem[];
 }
 
 const initialState: OrderState = {
   selectedMenuItem: null,
   itemOrderDetail: null,
+  cart: [],
 };
 
 export const orderSlice = createSlice({
@@ -48,10 +54,54 @@ export const orderSlice = createSlice({
         }
       }
     },
+    addItemToCart: (state) => {
+      if (state.itemOrderDetail) {
+        state.cart.push({
+          ...state.itemOrderDetail,
+          id: randomUUID(),
+        });
+
+        state.selectedMenuItem = null;
+      }
+    },
+    increaseCartItem: (state, action) => {
+      const itemId = action.payload;
+
+      const foundItem = state.cart.find((item) => item.id === itemId);
+
+      if (foundItem) {
+        foundItem.numberOfItem++;
+      }
+    },
+    decreaseCartItem: (state, action) => {
+      const itemId = action.payload;
+
+      const foundItem = state.cart.find((item) => item.id === itemId);
+
+      if (foundItem && foundItem.numberOfItem > 1) {
+        foundItem.numberOfItem--;
+      }
+
+      if (foundItem && foundItem.numberOfItem === 1) {
+        state.cart = state.cart.filter((item) => item.id);
+      }
+    },
+
+    resetCart: () => {
+      return initialState;
+    },
   },
 });
 
-export const { openModal, closeModal, initDetail, updateCustomize } =
-  orderSlice.actions;
+export const {
+  openModal,
+  closeModal,
+  initDetail,
+  updateCustomize,
+  addItemToCart,
+  increaseCartItem,
+  decreaseCartItem,
+  resetCart,
+} = orderSlice.actions;
 
 export const orderReducer = orderSlice.reducer;

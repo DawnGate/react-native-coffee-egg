@@ -3,16 +3,16 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import { COLORS } from "@/constants/colors";
-import { IOptionSelect } from "@/types/order";
+import { IOptionSelectOptional } from "@/types/order";
 
 type Props = {
   title: string;
-  options: IOptionSelect[];
-  onSelect?: (value: string) => void;
-  value?: string;
+  options: IOptionSelectOptional[];
+  onSelect?: (value: IOptionSelectOptional) => void;
+  value?: IOptionSelectOptional;
 };
 export const SelectOptions = ({ title, value, options, onSelect }: Props) => {
-  const toggleSelected = (val: string) => {
+  const toggleSelected = (val: IOptionSelectOptional) => {
     onSelect?.(val);
   };
 
@@ -22,15 +22,15 @@ export const SelectOptions = ({ title, value, options, onSelect }: Props) => {
       <View style={styles.optionsContainer}>
         {options.map((item) => {
           return (
-            <Pressable key={item.id} onPress={() => toggleSelected(item.id)}>
+            <Pressable key={item.id} onPress={() => toggleSelected(item)}>
               <View style={styles.itemContainer}>
                 <View
                   style={[
                     styles.itemSelect,
-                    item.id === value && styles.itemSelected,
+                    item.id === value?.id && styles.itemSelected,
                   ]}
                 >
-                  {item.id === value && (
+                  {item.id === value?.id && (
                     <FontAwesome6 name="check" size={24} color={COLORS.white} />
                   )}
                 </View>

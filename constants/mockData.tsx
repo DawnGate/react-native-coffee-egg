@@ -121,7 +121,7 @@ export const mockItemDetails: {
       },
     },
     defaultCustomizes: {
-      size: "L",
+      size: { ...sizeOptions["L"], cost: 40000 },
     },
   },
   "milk-coffee": {
@@ -142,7 +142,7 @@ export const mockItemDetails: {
       },
     },
     defaultCustomizes: {
-      size: "L",
+      size: { ...sizeOptions["L"], cost: 40000 },
     },
   },
 };

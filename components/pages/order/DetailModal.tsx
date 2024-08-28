@@ -2,6 +2,7 @@ import {
   initDetail,
   closeModal,
   updateCustomize,
+  addItemToCart,
 } from "@/store/features/order/orderSlice";
 import { RootState } from "@/store/store";
 import {
@@ -23,26 +24,20 @@ import { SelectOptions } from "./SelectOption";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useEffect, useState } from "react";
-import { ICustomizes, IDefaultCustomizes, IItemDetail } from "@/types/order";
+import { IDefaultCustomizes, IItemDetail } from "@/types/order";
 import { numberWithCommas } from "@/utils/numbers";
 
-const getItemValue = (
-  customizes?: ICustomizes,
-  defaultCustomizes?: IDefaultCustomizes
-) => {
-  if (!customizes || !defaultCustomizes) {
+const getItemValue = (customizes?: IDefaultCustomizes) => {
+  if (!customizes) {
     return {
       cost: 0,
       currency: "",
     };
   }
 
-  const foundSize = customizes.size.options.find(
-    (option) => option.id === defaultCustomizes.size
-  );
-
-  const cost = foundSize ? foundSize.cost : 0;
-  const currency = foundSize?.currency;
+  const itemSize = customizes.size;
+  const cost = itemSize.cost;
+  const currency = itemSize.currency;
 
   return {
     cost,
@@ -64,10 +59,7 @@ export const DetailModel = () => {
 
   const showModal = !!itemDetail;
 
-  const itemValue = getItemValue(
-    itemDetail?.customizes,
-    itemOrderDetail?.customizes
-  );
+  const itemValue = getItemValue(itemOrderDetail?.customizes);
 
   useEffect(() => {
     if (selectedMenuItem) {
@@ -107,7 +99,7 @@ export const DetailModel = () => {
   };
 
   const handleAddOrder = () => {
-    handleCloseModal();
+    dispatch(addItemToCart());
   };
 
   return (

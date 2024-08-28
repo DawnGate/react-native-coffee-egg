@@ -11,30 +11,33 @@ import { RootState } from "@/store/store";
 import { initSetting } from "@/store/features/setting/settingSlice";
 import { getASDataByKey } from "@/utils/asyncStorage";
 import { SETTINGS } from "@/constants/settings";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   return (
-    <StoreProvider>
-      <LoadSetting>
-        <Stack>
-          <Stack.Screen
-            name="index"
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="(app)"
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen name="(aux)" options={{ headerShown: false }} />
-        </Stack>
-      </LoadSetting>
-    </StoreProvider>
+    <GestureHandlerRootView>
+      <StoreProvider>
+        <LoadSetting>
+          <Stack>
+            <Stack.Screen
+              name="index"
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="(app)"
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name="(aux)" options={{ headerShown: false }} />
+          </Stack>
+        </LoadSetting>
+      </StoreProvider>
+    </GestureHandlerRootView>
   );
 }
 

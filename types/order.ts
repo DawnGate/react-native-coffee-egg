@@ -1,6 +1,13 @@
 export type IOptionSelect = {
   id: string;
   text: string;
+  cost: number;
+  currency: string;
+};
+
+export type IOptionSelectOptional = {
+  id: string;
+  text: string;
   cost?: number;
   currency?: string;
 };
@@ -22,7 +29,7 @@ export type IMenuItem = {
 export type ICustomizes = {
   size: {
     title: string;
-    options: Required<IOptionSelect>[];
+    options: IOptionSelect[];
   };
   toppings?: {
     title: string;
@@ -31,14 +38,14 @@ export type ICustomizes = {
 };
 
 export type IDefaultCustomizes = {
-  size: string;
-  toppings?: string[];
+  size: IOptionSelect;
+  toppings?: IOptionSelect[];
 };
 
 export type IItemDetail = {
   id: string;
   title: string;
-  imageSource: string;
+  imageSource: any;
   description: string[];
   customizes: ICustomizes;
   defaultCustomizes: IDefaultCustomizes;
