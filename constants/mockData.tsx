@@ -8,6 +8,10 @@ import {
 export const mockDrinkImg = require("../assets/images/demos/drink.png");
 export const mockModalImg = require("../assets/images/demos/detailModal.jpg");
 
+export const mockBannerSignature = require("../assets/images/banners/our-signature.png");
+export const mockBannerRegular = require("../assets/images/banners/regular-coffee.jpg");
+export const mockBannerFruit = require("../assets/images/banners/fresh-fruit.jpeg");
+
 export const categoriesSignature = require("../assets/images/order/categories/signature.jpg");
 export const categoriesRegular = require("../assets/images/order/categories/regular.jpg");
 export const categoriesFruit = require("../assets/images/order/categories/fruit.jpg");
@@ -22,36 +26,46 @@ export const mockCategories: ICategory[] = [
     id: "signature",
     name: "Our signature",
     imageSource: categoriesSignature,
+    description: "Egg coffee, a traditional Hanoi drink",
+    bannerSource: mockBannerSignature,
   },
   {
     id: "regular",
     name: "Regular Coffee",
     imageSource: categoriesRegular,
+    description: "Vietnamese coffee, black OR milk?",
+    bannerSource: mockBannerRegular,
   },
   {
     id: "fruit",
     name: "Fresh Fruit",
     imageSource: categoriesFruit,
+    description: "Fruit in your cup, joice, yogurt, smoothie",
+    bannerSource: mockBannerFruit,
   },
   {
     id: "tea",
     name: "Tea",
     imageSource: categoriesSignature,
+    description: "Diversity of tea, fulfill you taste and mind",
   },
   {
     id: "food",
     name: "Food",
     imageSource: categoriesSignature,
+    description: "We include some food for hunger people",
   },
   {
     id: "special-foods",
     name: "Special Foods",
     imageSource: categoriesSignature,
+    description: "Vietnamese should try food",
   },
   {
     id: "beans",
     name: "Beans",
     imageSource: categoriesBeans,
+    description: "Take home beans and bag of coffee",
   },
 ];
 

@@ -1,24 +1,32 @@
 import { COLORS } from "@/constants/colors";
+import { mockCategories } from "@/constants/mockData";
+import { ICategory } from "@/types/order";
 import { router } from "expo-router";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
-const HomeBanner = () => {
+const HomeBanner = ({ data }: { data: ICategory }) => {
   const handlePress = () => {
     router.push("/(app)/order");
   };
 
   return (
     <View style={itemStyles.container}>
-      <View>
-        <Text style={itemStyles.titleText}>DRINKS</Text>
-        <Text style={itemStyles.descriptionText}>
-          Astro Bunny in Cosmos Collection
-        </Text>
+      <View style={itemStyles.dataContainer}>
+        <View>
+          <Text style={itemStyles.titleText}>{data.name}</Text>
+          <Text style={itemStyles.descriptionText}>{data.description}</Text>
+        </View>
+
+        <Pressable onPress={handlePress} style={itemStyles.btnContainer}>
+          <Text style={itemStyles.btnText}>Find out more</Text>
+        </Pressable>
       </View>
 
-      <Pressable onPress={handlePress} style={itemStyles.btnContainer}>
-        <Text style={itemStyles.btnText}>Find out more</Text>
-      </Pressable>
+      <View style={itemStyles.bannerContainer}>
+        {data.bannerSource && (
+          <Image style={itemStyles.bannerImage} source={data.bannerSource} />
+        )}
+      </View>
     </View>
   );
 };
@@ -26,12 +34,9 @@ const HomeBanner = () => {
 export const HomeBanners = () => {
   return (
     <View style={styles.container}>
-      <HomeBanner />
-      <HomeBanner />
-      <HomeBanner />
-      <HomeBanner />
-      <HomeBanner />
-      <HomeBanner />
+      {mockCategories.map((cat) => (
+        <HomeBanner data={cat} key={cat.id} />
+      ))}
     </View>
   );
 };
@@ -46,7 +51,9 @@ const styles = StyleSheet.create({
 
 const itemStyles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.latte,
+    position: "relative",
+  },
+  dataContainer: {
     padding: 16,
   },
   titleText: {
@@ -54,6 +61,7 @@ const itemStyles = StyleSheet.create({
     fontWeight: "700",
     color: COLORS.white,
     fontSize: 20,
+    textTransform: "uppercase",
   },
   descriptionText: {
     marginTop: 8,
@@ -74,5 +82,18 @@ const itemStyles = StyleSheet.create({
     fontWeight: "700",
     fontFamily: "Poppins",
     color: COLORS.black,
+  },
+  bannerContainer: {
+    position: "absolute",
+    top: 0,
+    height: "100%",
+    width: "100%",
+    backgroundColor: COLORS.latte,
+    zIndex: -1,
+  },
+  bannerImage: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
   },
 });

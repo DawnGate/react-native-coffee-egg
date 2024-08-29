@@ -16,6 +16,8 @@ export type ICategory = {
   id: string;
   name: string;
   imageSource: any;
+  description?: string;
+  bannerSource?: any;
 };
 
 export type IMenuItem = {
