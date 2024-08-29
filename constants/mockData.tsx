@@ -11,15 +11,25 @@ export const mockModalImg = require("../assets/images/demos/detailModal.jpg");
 export const mockBannerSignature = require("../assets/images/banners/our-signature.png");
 export const mockBannerRegular = require("../assets/images/banners/regular-coffee.jpg");
 export const mockBannerFruit = require("../assets/images/banners/fresh-fruit.jpeg");
+export const mockBannerTea = require("../assets/images/banners/tea.jpg");
+export const mockBannerFood = require("../assets/images/banners/food.jpg");
+export const mockBannerSpecialFoods = require("../assets/images/banners/special-foods.jpg");
+export const mockBannerBeans = require("../assets/images/banners/beans.jpg");
 
 export const categoriesSignature = require("../assets/images/order/categories/signature.jpg");
 export const categoriesRegular = require("../assets/images/order/categories/regular.jpg");
 export const categoriesFruit = require("../assets/images/order/categories/fruit.jpg");
+export const categoriesFood = require("../assets/images/order/categories/food.jpeg");
+export const categoriesTea = require("../assets/images/order/categories/tea.jpg");
+export const categoriesSpecialFood = require("../assets/images/order/categories/special-foods.png");
 export const categoriesBeans = require("../assets/images/order/categories/beans.jpg");
 
 export const signatureEggCoffee = require("../assets/images/order/signatures/egg-coffee.jpg");
 
 export const regularMilkCoffee = require("../assets/images/order/regulars/milk-coffee.jpeg");
+
+export const beansTrungNguyen = require("../assets/images/order/beans/trung-nguyen.png");
+export const beansHighLand = require("../assets/images/order/beans/high-land.png");
 
 export const mockCategories: ICategory[] = [
   {
@@ -46,26 +56,30 @@ export const mockCategories: ICategory[] = [
   {
     id: "tea",
     name: "Tea",
-    imageSource: categoriesSignature,
+    imageSource: categoriesTea,
     description: "Diversity of tea, fulfill you taste and mind",
+    bannerSource: mockBannerTea,
   },
   {
     id: "food",
     name: "Food",
-    imageSource: categoriesSignature,
+    imageSource: categoriesFood,
     description: "We include some food for hunger people",
+    bannerSource: mockBannerFood,
   },
   {
     id: "special-foods",
     name: "Special Foods",
-    imageSource: categoriesSignature,
+    imageSource: categoriesSpecialFood,
     description: "Vietnamese should try food",
+    bannerSource: mockBannerSpecialFoods,
   },
   {
     id: "beans",
     name: "Beans",
     imageSource: categoriesBeans,
     description: "Take home beans and bag of coffee",
+    bannerSource: mockBannerBeans,
   },
 ];
 
@@ -77,9 +91,30 @@ const signatureItems: IMenuItem[] = [
     cost: 40000,
     currency: "đ",
   },
+  {
+    id: "egg-cacao",
+    name: "Egg Cacao",
+    imageSource: signatureEggCoffee,
+    cost: 40000,
+    currency: "đ",
+  },
+  {
+    id: "egg-matcha",
+    name: "Egg Matcha",
+    imageSource: signatureEggCoffee,
+    cost: 40000,
+    currency: "đ",
+  },
 ];
 
 const regularItems: IMenuItem[] = [
+  {
+    id: "black-coffee",
+    name: "Black Coffee",
+    imageSource: regularMilkCoffee,
+    cost: 35000,
+    currency: "đ",
+  },
   {
     id: "milk-coffee",
     name: "Milk Coffee",
@@ -89,11 +124,171 @@ const regularItems: IMenuItem[] = [
   },
 ];
 
+const fruitItems: IMenuItem[] = [
+  {
+    id: "mango-yogurt",
+    name: "Mango Yogurt",
+    imageSource: regularMilkCoffee,
+    cost: 65000,
+    currency: "đ",
+  },
+  {
+    id: "avocado-yogurt",
+    name: "Avocado Yogurt",
+    imageSource: regularMilkCoffee,
+    cost: 65000,
+    currency: "đ",
+  },
+  {
+    id: "lime-juice",
+    name: "Lime Juice",
+    imageSource: regularMilkCoffee,
+    cost: 40000,
+    currency: "đ",
+  },
+  {
+    id: "orange-juice",
+    name: "Orange Juice",
+    imageSource: regularMilkCoffee,
+    cost: 50000,
+    currency: "đ",
+  },
+];
+
+const teaItems: IMenuItem[] = [
+  {
+    id: "lotus-tea",
+    name: "Lotus Tea",
+    imageSource: regularMilkCoffee,
+    cost: 50000,
+    currency: "đ",
+  },
+  {
+    id: "jasmine-tea",
+    name: "Jasmine Tea",
+    imageSource: regularMilkCoffee,
+    cost: 50000,
+    currency: "đ",
+  },
+  {
+    id: "kumquat-ginger-lemongrass-tea",
+    name: "Kumquat Ginger Lemongrass Tea",
+    imageSource: regularMilkCoffee,
+    cost: 55000,
+    currency: "đ",
+  },
+  {
+    id: "passion-fruit-ginger-tea",
+    name: "Passion Fruit Ginger Tea",
+    imageSource: regularMilkCoffee,
+    cost: 55000,
+    currency: "đ",
+  },
+  {
+    id: "orange-cinnamon-tea",
+    name: "Orange Cinnamon Tea",
+    imageSource: regularMilkCoffee,
+    cost: 55000,
+    currency: "đ",
+  },
+  {
+    id: "honey-lemongrass-lime-tea",
+    name: "Honey Lemongrass Lime Tea",
+    imageSource: regularMilkCoffee,
+    cost: 55000,
+    currency: "đ",
+  },
+  {
+    id: "peach-tea",
+    name: "Peach Tea",
+    imageSource: regularMilkCoffee,
+    cost: 55000,
+    currency: "đ",
+  },
+  {
+    id: "lychee-tea",
+    name: "Lychee Tea",
+    imageSource: regularMilkCoffee,
+    cost: 55000,
+    currency: "đ",
+  },
+];
+
+const foodItems: IMenuItem[] = [
+  {
+    id: "sunny-side-up-egg",
+    name: "Sunny Side Up Egg",
+    imageSource: regularMilkCoffee,
+    cost: 80000,
+    currency: "đ",
+  },
+  {
+    id: "omelette",
+    name: "Omelette",
+    imageSource: regularMilkCoffee,
+    cost: 80000,
+    currency: "đ",
+  },
+  {
+    id: "ham-cheese-toast",
+    name: "Ham Cheese Toast",
+    imageSource: regularMilkCoffee,
+    cost: 90000,
+    currency: "đ",
+  },
+  {
+    id: "cheese toast",
+    name: "Cheese Toast",
+    imageSource: regularMilkCoffee,
+    cost: 80000,
+    currency: "đ",
+  },
+];
+
+const specialFoodItems: IMenuItem[] = [
+  {
+    id: "spring-roll",
+    name: "Spring Roll",
+    imageSource: regularMilkCoffee,
+    cost: 80000,
+    currency: "đ",
+  },
+  {
+    id: "banh-mi",
+    name: "Banh Mi",
+    imageSource: regularMilkCoffee,
+    cost: 30000,
+    currency: "đ",
+  },
+];
+
+const BeansItems: IMenuItem[] = [
+  {
+    id: "highland-coffee",
+    name: "HighLands Coffee",
+    imageSource: beansHighLand,
+    cost: 250000,
+    currency: "đ",
+  },
+  {
+    id: "trung-nguyen-coffee",
+    name: "Trung Nguyen Coffee",
+    imageSource: beansTrungNguyen,
+    cost: 250000,
+    currency: "đ",
+  },
+];
+
 export const mockMenuItems: {
   [key: string]: IMenuItem[];
 } = {
   signature: signatureItems,
   regular: regularItems,
+  fruit: fruitItems,
+  tea: teaItems,
+  food: foodItems,
+  "special-foods": specialFoodItems,
+  beans: BeansItems,
 };
 
 const sizeOptions: {

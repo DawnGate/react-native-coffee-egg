@@ -97,6 +97,7 @@ const itemStyles = StyleSheet.create({
     backgroundColor: COLORS.espresso,
     justifyContent: "center",
     alignItems: "center",
+    overflow: "hidden",
   },
   image: {
     flex: 1,
