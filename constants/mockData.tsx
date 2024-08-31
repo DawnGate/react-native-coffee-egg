@@ -34,6 +34,24 @@ export const regularBlackCoffee = require("../assets/images/order/regulars/black
 export const fruitMangoYogurt = require("../assets/images/order/fruit/mango-yogurt.jpg");
 export const fruitAvocadoYogurt = require("../assets/images/order/fruit/avocado-yogurt.jpg");
 export const fruitLimeJuice = require("../assets/images/order/fruit/lime-juice.jpg");
+export const fruitOrangeJuice = require("../assets/images/order/fruit/orange-juice.jpeg");
+
+export const teaLotusTea = require("../assets/images/order/tea/lotus-tea.jpg");
+export const teaJasmineTea = require("../assets/images/order/tea/jasmine-tea.jpg");
+export const teaKglTea = require("../assets/images/order/tea/kgl-tea.jpeg");
+export const teaPfgTea = require("../assets/images/order/tea/pfg-tea.jpg");
+export const teaOrangeCinnamonTea = require("../assets/images/order/tea/orange-cinnamon-tea.jpg");
+export const teaHllTea = require("../assets/images/order/tea/hll-tea.jpg");
+export const teaPeachTea = require("../assets/images/order/tea/peach-tea.jpg");
+export const teaLycheeTea = require("../assets/images/order/tea/lychee-tea.jpeg");
+
+export const foodSsuEgg = require("../assets/images/order/food/sunny-side-up-egg.jpg");
+export const foodOmelette = require("../assets/images/order/food/omelette.jpg");
+export const foodHamCheeseToast = require("../assets/images/order/food/ham-cheese-toast.jpeg");
+export const foodCheeseToast = require("../assets/images/order/food/cheese-toast.jpg");
+
+export const foodChaCom = require("../assets/images/order/special-foods/cha-com.jpg");
+export const foodBanhMi = require("../assets/images/order/special-foods/banh-mi.jpeg");
 
 export const beansTrungNguyen = require("../assets/images/order/beans/trung-nguyen.png");
 export const beansHighLand = require("../assets/images/order/beans/high-land.png");
@@ -156,7 +174,7 @@ const fruitItems: IMenuItem[] = [
   {
     id: "orange-juice",
     name: "Orange Juice",
-    imageSource: regularMilkCoffee,
+    imageSource: fruitOrangeJuice,
     cost: 50000,
     currency: "đ",
   },
@@ -166,56 +184,56 @@ const teaItems: IMenuItem[] = [
   {
     id: "lotus-tea",
     name: "Lotus Tea",
-    imageSource: regularMilkCoffee,
+    imageSource: teaLotusTea,
     cost: 50000,
     currency: "đ",
   },
   {
     id: "jasmine-tea",
     name: "Jasmine Tea",
-    imageSource: regularMilkCoffee,
+    imageSource: teaJasmineTea,
     cost: 50000,
     currency: "đ",
   },
   {
     id: "kumquat-ginger-lemongrass-tea",
     name: "Kumquat Ginger Lemongrass Tea",
-    imageSource: regularMilkCoffee,
+    imageSource: teaKglTea,
     cost: 55000,
     currency: "đ",
   },
   {
     id: "passion-fruit-ginger-tea",
     name: "Passion Fruit Ginger Tea",
-    imageSource: regularMilkCoffee,
+    imageSource: teaPfgTea,
     cost: 55000,
     currency: "đ",
   },
   {
     id: "orange-cinnamon-tea",
     name: "Orange Cinnamon Tea",
-    imageSource: regularMilkCoffee,
+    imageSource: teaOrangeCinnamonTea,
     cost: 55000,
     currency: "đ",
   },
   {
     id: "honey-lemongrass-lime-tea",
     name: "Honey Lemongrass Lime Tea",
-    imageSource: regularMilkCoffee,
+    imageSource: teaHllTea,
     cost: 55000,
     currency: "đ",
   },
   {
     id: "peach-tea",
     name: "Peach Tea",
-    imageSource: regularMilkCoffee,
+    imageSource: teaPeachTea,
     cost: 55000,
     currency: "đ",
   },
   {
     id: "lychee-tea",
     name: "Lychee Tea",
-    imageSource: regularMilkCoffee,
+    imageSource: teaLycheeTea,
     cost: 55000,
     currency: "đ",
   },
@@ -225,28 +243,28 @@ const foodItems: IMenuItem[] = [
   {
     id: "sunny-side-up-egg",
     name: "Sunny Side Up Egg",
-    imageSource: regularMilkCoffee,
+    imageSource: foodSsuEgg,
     cost: 80000,
     currency: "đ",
   },
   {
     id: "omelette",
     name: "Omelette",
-    imageSource: regularMilkCoffee,
+    imageSource: foodOmelette,
     cost: 80000,
     currency: "đ",
   },
   {
     id: "ham-cheese-toast",
     name: "Ham Cheese Toast",
-    imageSource: regularMilkCoffee,
+    imageSource: foodHamCheeseToast,
     cost: 90000,
     currency: "đ",
   },
   {
     id: "cheese toast",
     name: "Cheese Toast",
-    imageSource: regularMilkCoffee,
+    imageSource: foodCheeseToast,
     cost: 80000,
     currency: "đ",
   },
@@ -256,14 +274,14 @@ const specialFoodItems: IMenuItem[] = [
   {
     id: "spring-roll",
     name: "Spring Roll",
-    imageSource: regularMilkCoffee,
+    imageSource: foodChaCom,
     cost: 80000,
     currency: "đ",
   },
   {
     id: "banh-mi",
     name: "Banh Mi",
-    imageSource: regularMilkCoffee,
+    imageSource: foodBanhMi,
     cost: 30000,
     currency: "đ",
   },
