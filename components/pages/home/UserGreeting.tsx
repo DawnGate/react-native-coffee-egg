@@ -16,8 +16,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   titleText: {
-    fontFamily: "Poppins",
-    fontWeight: "700",
+    fontFamily: "Sevillana",
     fontSize: 20,
     lineHeight: 30,
   },

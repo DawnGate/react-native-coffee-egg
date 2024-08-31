@@ -25,8 +25,15 @@ export const categoriesSpecialFood = require("../assets/images/order/categories/
 export const categoriesBeans = require("../assets/images/order/categories/beans.jpg");
 
 export const signatureEggCoffee = require("../assets/images/order/signatures/egg-coffee.jpg");
+export const signatureEggCacao = require("../assets/images/order/signatures/egg-cacao.jpg");
+export const signatureEggMatcha = require("../assets/images/order/signatures/egg-matcha.jpg");
 
 export const regularMilkCoffee = require("../assets/images/order/regulars/milk-coffee.jpeg");
+export const regularBlackCoffee = require("../assets/images/order/regulars/black-coffee.png");
+
+export const fruitMangoYogurt = require("../assets/images/order/fruit/mango-yogurt.jpg");
+export const fruitAvocadoYogurt = require("../assets/images/order/fruit/avocado-yogurt.jpg");
+export const fruitLimeJuice = require("../assets/images/order/fruit/lime-juice.jpg");
 
 export const beansTrungNguyen = require("../assets/images/order/beans/trung-nguyen.png");
 export const beansHighLand = require("../assets/images/order/beans/high-land.png");
@@ -94,14 +101,14 @@ const signatureItems: IMenuItem[] = [
   {
     id: "egg-cacao",
     name: "Egg Cacao",
-    imageSource: signatureEggCoffee,
+    imageSource: signatureEggCacao,
     cost: 40000,
     currency: "đ",
   },
   {
     id: "egg-matcha",
     name: "Egg Matcha",
-    imageSource: signatureEggCoffee,
+    imageSource: signatureEggMatcha,
     cost: 40000,
     currency: "đ",
   },
@@ -111,7 +118,7 @@ const regularItems: IMenuItem[] = [
   {
     id: "black-coffee",
     name: "Black Coffee",
-    imageSource: regularMilkCoffee,
+    imageSource: regularBlackCoffee,
     cost: 35000,
     currency: "đ",
   },
@@ -128,21 +135,21 @@ const fruitItems: IMenuItem[] = [
   {
     id: "mango-yogurt",
     name: "Mango Yogurt",
-    imageSource: regularMilkCoffee,
+    imageSource: fruitMangoYogurt,
     cost: 65000,
     currency: "đ",
   },
   {
     id: "avocado-yogurt",
     name: "Avocado Yogurt",
-    imageSource: regularMilkCoffee,
+    imageSource: fruitAvocadoYogurt,
     cost: 65000,
     currency: "đ",
   },
   {
     id: "lime-juice",
     name: "Lime Juice",
-    imageSource: regularMilkCoffee,
+    imageSource: fruitLimeJuice,
     cost: 40000,
     currency: "đ",
   },

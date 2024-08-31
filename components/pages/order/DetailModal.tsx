@@ -64,6 +64,10 @@ export const DetailModel = () => {
   useEffect(() => {
     if (selectedMenuItem) {
       const foundItem = mockItemDetails[selectedMenuItem];
+      if (!foundItem) {
+        dispatch(closeModal());
+        return;
+      }
       setItemDetail(foundItem);
       dispatch(
         initDetail({

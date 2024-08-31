@@ -44,6 +44,7 @@ export default function RootLayout() {
 const LoadSetting = ({ children }: { children: ReactNode }) => {
   const [loaded, error] = useFonts({
     Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
+    Sevillana: require("../assets/fonts/Sevillana-Regular.ttf"),
   });
 
   const loadedSetting = useSelector(
